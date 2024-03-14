@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import GlobeMap from './globe';
+import GlobeMap from './globe.js';
 
 function App() {
   return (
