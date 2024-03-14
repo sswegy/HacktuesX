@@ -7,7 +7,6 @@
     flex-direction: column;
 }
 
-
 .searchbar-container {
     display: flex;
 	align-items: center;
@@ -33,6 +32,26 @@
 }
 
 .searchbar:focus {
+    background: #1B2454;
+	border: 1px solid #4B67EB;
+	border-radius: 15px;
+}
+
+.side-info-button {
+    margin-top: 5px;
+	margin-left: 5px;
+	font-size: 18px;
+	padding: 9px 8px;
+	width: 10%;
+	outline: none;
+	background: #1A1E2E;
+	color: #D7D9D7;
+	border: 1px solid #333f72;
+	border-radius: 10px;
+	transition: .5s ease;
+}
+
+.side-info-button:hover {
     background: #1B2454;
 	border: 1px solid #4B67EB;
 	border-radius: 15px;
