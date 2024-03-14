@@ -1,12 +1,13 @@
 import express from "express"
 import { getFishes, getFishByID, createFish, updateFishByID } from "../controllers/fishController.js"
 
+
 const router = express.Router()
 
 
 // GET
 router.get("/", async (req, res) => {
-    //const fishes = await getFishes()
+    const fishes = await getFishes()
     res.status(200).send("fishes")
 })
 
