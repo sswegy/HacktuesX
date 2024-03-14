@@ -1,18 +1,14 @@
-import './App.css';
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import GlobeMap from './globe';
+import "./App.css";
+import React from "react";
+import GlobeMap from "./components/globeMap";
+import SearchBar from "./components/searchBar";
 
 function App() {
   return (
     <div className="container">
-    <div className="searchBar">
-      <FontAwesomeIcon icon={faMagnifyingGlass} />
-      <input placeholder="test"/>
+      <SearchBar />
+      <GlobeMap />
     </div>
-    <GlobeMap/>
-  </div>
   );
 }
 
