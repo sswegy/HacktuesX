@@ -1,12 +1,13 @@
 import express from "express"
-import { getFishes, getFishByID, createFish, updateFishByID } from "../controllers/fishesController.js"
+import { getFishes, getFishByID, createFish, updateFishByID } from "../controllers/fishController.js"
 
 const router = express.Router()
 
+
 // GET
 router.get("/", async (req, res) => {
-    const fishes = await getFishes()
-    res.status(200).send(fishes)
+    //const fishes = await getFishes()
+    res.status(200).send("fishes")
 })
 
 router.get("/:id", async (req, res) => {
@@ -35,5 +36,6 @@ router.put("/:id", async (req, res) => {
 
     res.status(200).send({ message: "Fish updated successfully" })
 })
+
 
 export default router
