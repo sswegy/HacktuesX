@@ -2,9 +2,9 @@ import mysql from "mysql2"
 
 
 const pool = mysql.createPool({
-    host: "34.133.163.137",
-    user: "hacktues10",
-    password: "KtR8eU<LU}/4T.Jm",
+    host: "localhost",
+    user: "root",
+    password: "password",
     database: "fin_finder"
 }).promise()
 

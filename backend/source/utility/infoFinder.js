@@ -1,4 +1,5 @@
-const axios = require('axios');
+import axios from 'axios'
+
 
 async function fetchDescription(query) {
     const baseUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary';
@@ -13,23 +14,19 @@ async function fetchDescription(query) {
     }
 }
 
-export async function searchImages(query) {
+export default async function getImageAndDescription(query) {
     const apiKey = 'AIzaSyCilwwxSr_t0IND_CxVgkvCUlp0z2Tw3kw'; 
     const searchEngineId = 'd1d8a77927442467a';
     const baseUrl = 'https://www.googleapis.com/customsearch/v1';
     const endpoint = `${baseUrl}?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${encodeURIComponent(query)}`;
 
     try {
-        const [imageResponse, description] = await Promise.all([
-            axios.get(endpoint),
-            fetchDescription(query)
-        ]);
-
-        const firstItem = imageResponse.data.items[0];
+        const response = await axios.get(endpoint);
+        const firstItem = response.data.items[0];
         if (firstItem) {
             return {
                 url: firstItem.link,
-                description: description // Include the description in the returned object
+                description: await fetchDescription(query)
             };
         } else {
             console.error('No images found for the query:', query);
@@ -40,3 +37,5 @@ export async function searchImages(query) {
         return null;
     }
 }
+
+getImageAndDescription('Periophthalmus barbarus').then(item => {console.log(item.description)})

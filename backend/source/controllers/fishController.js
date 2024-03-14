@@ -1,6 +1,7 @@
-import pool from "../database/database.js";
+import pool from "../database/database.js"
 
-// GET FISHES
+
+// GET
 export async function getFishes() {
     const [results] = await pool.query("SELECT * FROM fishes")
     return results
