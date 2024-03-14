@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS fishes (
     locality VARCHAR(255) NOT NULL,
     depth INT,
     depthAccuracy DECIMAL(2, 2) 
-);
+)
