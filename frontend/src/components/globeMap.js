@@ -6,6 +6,7 @@ export default function GlobeMap() {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [hoveredPolygon, setHoveredPolygon] = useState("");
+  const [clickedPolygon, setClickedPolygon] = useState("");
   const globeRef = useRef(null);
 
 
@@ -27,10 +28,18 @@ export default function GlobeMap() {
       type: "Feature",
       geometry: {
         type: "Polygon",
-        coordinates: [coordinates['north-atlantic']]
+        coordinates: [
+          [
+              [0.001, 0.001],
+              [0, 0.001],
+              [0, 0],
+              [0.001, 0],        
+              [0.001, 0.001]
+          ]
+      ]
       },
-      name: "north-atlantic",
-      color: [255, 89, 94]
+      name: "world",
+      color: [255, 255, 255]
     },
     {
       type: "Feature",
@@ -68,26 +77,38 @@ export default function GlobeMap() {
       name: "indian",
       color: [106, 76, 147]
     },
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [coordinates["sargasso-sea"]]
+      },
+      name: "sargasso-sea",
+      color: [106, 76, 147]
+    },
   ];
 
-
-  const handleClick = (event) => {
-    const { offsetX, offsetY } = event.nativeEvent;
-    if (globeRef.current) {
-      const globeCoords = globeRef.current.toGlobeCoords(offsetX, offsetY);
-      if (globeCoords) {
-        const { lat, lng } = globeCoords;
-        console.log("Clicked coordinates:", { lat, lng });
-      } else {
-        console.log("Globe coordinates could not be determined.");
-      }
+  const changePolygonColor = (polygon) => {
+    if(polygon.name === "world")
+      return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.01 + ")"
+    if (hoveredPolygon === polygon.name || clickedPolygon === polygon.name) {
+      return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.6 + ")"
     } else {
-      console.log("Globe reference is not yet initialized.");
+      return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.2 + ")"
     }
-  };
+  }
+
+  const changeAltitude = (polygon) => {
+    if(polygon.name === "world") return 0.001
+    if( clickedPolygon === polygon.name ){
+      return 0.1
+    }else{
+      return 0.05
+    }
+  }
 
   return (
-    <div className="globemap-container" onClick={handleClick}>
+    <div className="globemap-container">
       <Globe
         ref={globeRef}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -96,21 +117,19 @@ export default function GlobeMap() {
 
         polygonsData={polygons}
         polygonGeoJsonGeometry={(polygon) => polygon.geometry}
-        polygonAltitude={0.08}
-        polygonSideColor={(polygon) => { return "rgba(0, 100, 0, 0.15)"; }}
+        polygonAltitude={(polygon) => { return changeAltitude(polygon) }}
+        polygonSideColor={(polygon) => { return changePolygonColor(polygon) }}
         polygonStrokeColor={(polygon) => { return '#000000'; }}
-        polygonCapColor={(polygon) => {
-          if (hoveredPolygon === polygon.name) {
-            console.log(polygon.name)
-            console.log(hoveredPolygon)
-            return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.6 + ")"
-          } else {
-            console.log("aa")
-            return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.2 + ")"
-          }
+        polygonCapColor={(polygon) => { return changePolygonColor(polygon) }}
+        onPolygonHover={(polygon) => {
+          if (polygon != null)
+            setHoveredPolygon(polygon.name)
         }}
-        onPolygonHover={(polygon) => { polygon != null ? setHoveredPolygon(polygon.name) : console.log("nishto") }
-        }
+        onPolygonClick={(polygon) => {
+          console.log(polygon)
+          if (polygon != null)
+            setClickedPolygon(polygon.name)
+        }}
       />
     </div>
   );
