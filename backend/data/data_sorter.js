@@ -1,7 +1,12 @@
 import fs from 'fs';
+import getImageAndDescription from '../source/utility/infoFinder.js'
 import coordinates from './coordinates.js';
-
-fs.readFile('./backend/data/extractedData.json', 'utf8', (err, data) => {
+import turf from "turf"
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import createFish from '../source/controllers/fishController.js'
+import { type } from 'os';
+import { unsubscribe } from 'diagnostics_channel';
+fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
     if (err) {
         console.error('Error reading file:', err);
         return;
@@ -9,54 +14,57 @@ fs.readFile('./backend/data/extractedData.json', 'utf8', (err, data) => {
     
     try {
         // Parse JSON data
+        
         const jsonData = JSON.parse(data);
-        console.log('Parsed JSON data:', jsonData);
         const arr = Array.from(jsonData);
-        arr.forEach(element => {
-          
+        for(let i = 0; i < jsonData.length; i++)
+        {
+            
+            
             for(const key in coordinates)
-            {
-                if(pointInsidePolygon( element["decimalLatitude"],element["decimalLongitude"],coordinates[key]))
+            {   
+                if( pointInsidePolygon( jsonData[i]["decimalLatitude"],jsonData[i]["decimalLongitude"],coordinates[key]))
                 {
-                    console.log(element["scientificName"]," in ",key);
+                   
+                    console.log(jsonData[i]["scientificName"]," in ",key);
+                    
+                    let obj = jsonData[i]
+                    let item = await getImageAndDescription(obj.scientificName)
+        
+                    if (item && typeof(item.description) === 'undefined') {
+                    let name = obj.scientificName.split(' ')
+                    item = await getImageAndDescription(name[0])
+                    item.description = " ";
+                    }
+            
+                    obj.description = item.description
+                    obj.image = item.url   
+                    console.log(obj.description,obj.image);
+                    
+                    //populating database
+                   if(jsonData[i]["depth"] === 'unspecified')
+                   {
+                    jsonData[i]["depth"] = 0;
+                   }
+                   if(jsonData[i]["depthAccuracy"] === "unspecified")
+                   {
+                    jsonData[i]["depthAccuracy"] = 0;
+                   }
+                    createFish(jsonData[i]["scientificName"], Number(jsonData[i]["decimalLatitude"]), Number(jsonData[i]["decimalLongitude"]), jsonData[i]["locality"], jsonData[i]["depth"], jsonData[i]["depthAccuracy"], obj.description, obj.image, key)
+                    
+
                 }
             }
-        });
+        }
     } catch (parseError) {
         console.error('Error parsing JSON:', parseError);
     }
 });
-
-function pointInsidePolygon(x, y, poly) {
+function pointInsidePolygon(latitude, longitude, polygon) {
+    // Convert city boundary coordinates to Turf.js polygon
+    const BoundaryPolygon = turf.polygon([polygon]);
+    const point = turf.point([longitude, latitude]);
+    const isInside = booleanPointInPolygon(point, BoundaryPolygon);
     
-    
-    
-    let n = poly.length;
-    let inside = false;
-    let p1x = poly[0][0];
-    let p1y = poly[0][1];
-    for (let i = 1; i <= n; i++) {
-        let p2x = poly[i % n][0];
-        let p2y = poly[i % n][1];
-        if (y > Math.min(p1y, p2y)) {
-            if (y <= Math.max(p1y, p2y)) {
-                if (x <= Math.max(p1x, p2x)) {
-                    if (p1y != p2y) {
-                        let xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x;
-                        if (p1x == p2x || x <= xinters) {
-                            inside = !inside;
-                        }
-                    }
-                }
-            }
-        }
-        p1x = p2x;
-        p1y = p2y;
-    }
-    return inside;
-}
-
-function retrieve_cords()
-{
-
+    return isInside;
 }
