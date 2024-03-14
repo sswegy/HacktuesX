@@ -6,7 +6,7 @@ const router = express.Router()
 
 // GET
 router.get("/", async (req, res) => {
-    //const fishes = await getFishes()
+    const fishes = await getFishes()
     res.status(200).send("fishes")
 })
 
