@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
-import coordinates from "../data/coordinates.js";
+import polygons from "./polygons.js";
 
 export default function GlobeMap() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -23,71 +23,6 @@ export default function GlobeMap() {
     };
   }, []);
 
-  const polygons = [
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-              [0.001, 0.001],
-              [0, 0.001],
-              [0, 0],
-              [0.001, 0],        
-              [0.001, 0.001]
-          ]
-      ]
-      },
-      name: "world",
-      color: [255, 255, 255]
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates['north-pacific']]
-      },
-      name: "north-pacific",
-      color: [138, 201, 38]
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates['south-atlantic']]
-      },
-      name: "south-atlantic",
-      color: [255, 202, 58]
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates['south-pacific']]
-      },
-      name: "south-pacific",
-      color: [25, 130, 196]
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates.indian]
-      },
-      name: "indian",
-      color: [106, 76, 147]
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates["sargasso-sea"]]
-      },
-      name: "sargasso-sea",
-      color: [106, 76, 147]
-    },
-  ];
-
   const changePolygonColor = (polygon) => {
     if(polygon.name === "world")
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.01 + ")"
@@ -103,7 +38,7 @@ export default function GlobeMap() {
     if( clickedPolygon === polygon.name ){
       return 0.1
     }else{
-      return 0.05
+      return 0.03
     }
   }
 
