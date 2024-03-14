@@ -21,16 +21,12 @@ export default async function searchImages(query) {
     const endpoint = `${baseUrl}?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${encodeURIComponent(query)}`;
 
     try {
-        const [imageResponse, description] = await Promise.all([
-            axios.get(endpoint),
-            fetchDescription(query)
-        ]);
-
-        const firstItem = imageResponse.data.items[0];
+        const response = await axios.get(endpoint);
+        const firstItem = response.data.items[0];
         if (firstItem) {
             return {
                 url: firstItem.link,
-                description: description // Include the description in the returned object
+                description: await fetchDescription(query)
             };
         } else {
             console.error('No images found for the query:', query);
