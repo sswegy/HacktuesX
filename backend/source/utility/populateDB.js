@@ -3,7 +3,7 @@ import getImageAndDescription from './infoFinder.js'
 
 
 function populateDB() {
-    fs.readFile('../../data/extractedData.json', 'utf8', async (err, data) => {
+    fs.readFile('backend/data/extractedData.json', 'utf8', async (err, data) => {
         if (err) {
             console.error('Error reading file:', err)
             return
@@ -11,6 +11,7 @@ function populateDB() {
     
         let jsonData = JSON.parse(data)
         for (let i = 0; i < jsonData.length; i++) {
+            console.log(jsonData[i]);
             let obj = jsonData[i]
             let item = await getImageAndDescription(obj.scientificName)
         
