@@ -14,7 +14,7 @@ async function fetchDescription(query) {
     }
 }
 
-export default async function searchImages(query) {
+export default async function getImageAndDescription(query) {
     const apiKey = 'AIzaSyCilwwxSr_t0IND_CxVgkvCUlp0z2Tw3kw'; 
     const searchEngineId = 'd1d8a77927442467a';
     const baseUrl = 'https://www.googleapis.com/customsearch/v1';
@@ -37,3 +37,5 @@ export default async function searchImages(query) {
         return null;
     }
 }
+
+getImageAndDescription('Periophthalmus barbarus').then(item => {console.log(item.description)})

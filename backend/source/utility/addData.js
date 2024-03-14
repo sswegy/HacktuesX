@@ -1,23 +1,21 @@
 import fs from 'fs'
-import searchImages from '../../../frontend/src/searchEngine.js'
+import getImageAndDescription from './infoFinder.js'
 
 
 function addData() {
-    fs.readFile('D:/Programming/JavaScript/HacktuesX/backend/data/extractedData.json', 'utf8', (err, data) => {
+    fs.readFile('../../data/extractedData.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading file:', err)
             return
         }
     
         let jsonData = JSON.parse(data)
-        jsonData.forEach(async obj => {
-            const desc = await searchImages(obj.scientificName).description
-            console.log(desc)
-            obj.description = desc
+        jsonData.forEach(obj => {
+            getImageAndDescription(obj.scientificName).then(item => {obj.description = item.description})
         })
     
         let updatedJsonData = JSON.stringify(jsonData, null, 2)
-        fs.writeFile('D:/Programming/JavaScript/HacktuesX/backend/data/extractedData.json', updatedJsonData, 'utf8', (err) => {
+        fs.writeFile('../../data/extractedData.json', updatedJsonData, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing file:', err)
                 return
