@@ -9,8 +9,7 @@ async function fetchDescription(query) {
         const response = await axios.get(endpoint);
         return response.data.extract;
     } catch (error) {
-        console.error('Error fetching description:', error);
-        return null;
+        // console.error('Error fetching description:', error);
     }
 }
 
@@ -30,11 +29,9 @@ export default async function getImageAndDescription(query) {
             };
         } else {
             console.error('No images found for the query:', query);
-            return null;
         }
     } catch (error) {
         console.error('Error fetching images:', error);
-        return null;
     }
 }
 
