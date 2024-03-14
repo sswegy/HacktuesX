@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
-import GlobeMap from "./components/globeMap";
-import SearchBar from "./components/searchBar";
+import GlobeMap from "./components/globeMap.js";
+import SearchBar from "./components/searchBar.js";
 
 function App() {
   return (
