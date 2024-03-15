@@ -1,21 +1,15 @@
 import fs from "fs"; 
 
-// Function to read JSON file and extract unique scientific names
 function getUniqueScientificNames(filePath) {
     try {
-        // Read the JSON file
         const data = fs.readFileSync(filePath);
         const jsonData = JSON.parse(data);
 
-        // Array to store unique scientific names
         const uniqueNames = [];
 
-        // Iterate through each item in the JSON data
         for (const item of jsonData) {
-            // Assuming the JSON structure has a key named 'scientificName'
             const scientificName = item.scientificName;
 
-            // Check if the scientific name is not already in the uniqueNames array
             if (!uniqueNames.includes(scientificName)) {
                 uniqueNames.push(scientificName);
             }
@@ -28,10 +22,8 @@ function getUniqueScientificNames(filePath) {
     }
 }
 
-// Provide the path to your JSON file
 const filePath = 'backend/data/extractedData.json';
 
-// Call the function to get unique scientific names and log the result
 const uniqueScientificNames = getUniqueScientificNames(filePath);
 console.log('Unique Scientific Names:', uniqueScientificNames);
 
