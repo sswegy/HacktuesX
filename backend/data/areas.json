@@ -1632,12 +1632,13 @@
           ]
         ],
         "type": "Polygon"
-      }
+      },
+      "id": 7
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "antarctic-north-indian-coast"
+        "name": "antarctic-west-coast"
       },
       "geometry": {
         "coordinates": [
@@ -1853,7 +1854,8 @@
           ]
         ],
         "type": "Polygon"
-      }
+      },
+      "id": 8
     },
     {
       "type": "Feature",
@@ -4044,7 +4046,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "antarctic-north-indian-coast"
+        "name": "antarctic-north-coast"
       },
       "geometry": {
         "coordinates": [
@@ -6867,7 +6869,9 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "south-america-west-coast"
+      },
       "geometry": {
         "coordinates": [
           [
