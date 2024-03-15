@@ -31,6 +31,16 @@ router.get('/id/:id', async (req, res) => {
     }
 });
 
+router.get('/area', async (req, res) => {
+    try {
+        const { area } = req.body;
+        const fish = await getFishByArea(area);
+        res.json(fish);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/common', async (req, res) => {
     try {
         const { area, type } = req.query;
