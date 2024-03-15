@@ -13,12 +13,10 @@ export async function getFishByID(id) {
 }
 
 export async function getFishByArea(area) {
-    const query = `SELECT DISTINCT * FROM fishes WHERE area = ? LIMIT 50`
+    const query = `SELECT * FROM fishes WHERE area = ? LIMIT 50`
 
     let [result] = await pool.query(query, [area])
-    result = result.filter((item, index, self) => {
-        return index === self.findIndex(t => t.name === item.name);
-    });
+    result = result.filter((item, index) => result.findIndex(obj => obj.scientificName === item.scientificName) === index);
 
     return result
 }
