@@ -9,6 +9,8 @@ body {
 	/*#1A1E2E*/
 	width: 100%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 	align-items: center;
 	position: relative;
 }
