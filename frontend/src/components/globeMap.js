@@ -2,13 +2,36 @@ import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
 import polygons from "./polygons.js";
 
+let fishArea = [{
+  "scientificName": "Antennatus sanguineus ",
+  "decimalLatitude": "24.333333",
+  "decimalLongitude": "-109.95",
+  "locality": "Punta norte de Isla Cerralvo, B.C.S.",
+  "depth": "3.0",
+  "depthAccuracy": "unspecified",
+  "area": "antarctic-north-coast",
+  "image": "kuri_mi",
+  "description": "qj go"
+},
+{
+  "scientificName": "Antennatus sanguineus ",
+  "decimalLatitude": "24.333333",
+  "decimalLongitude": "-109.95",
+  "locality": "Punta norte de Isla Cerralvo, B.C.S.",
+  "depth": "3.0",
+  "depthAccuracy": "unspecified",
+  "area": "south-america-west-coast",
+  "image": "kuri_mi",
+  "description": "qj go"
+}]
+
+
 export default function GlobeMap() {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [hoveredPolygon, setHoveredPolygon] = useState("");
   const [clickedPolygon, setClickedPolygon] = useState("");
   const globeRef = useRef(null);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,20 +47,38 @@ export default function GlobeMap() {
   }, []);
 
   const changePolygonColor = (polygon) => {
-    if(polygon.name === "world")
+    if (polygon.name === "world") {
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.01 + ")"
-    if (hoveredPolygon === polygon.name || clickedPolygon === polygon.name) {
+    }
+
+    for (const fish of fishArea) {
+      console.log(fish)
+      if (fish.area === polygon.name) {
+        return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.8 + ")"
+      }
+    }
+
+    if (clickedPolygon === polygon.name) {
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.6 + ")"
-    } else {
+    } else if (hoveredPolygon === polygon.name) {
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.2 + ")"
+    } else {
+      return "rgba(10,10,200,0.2)"
     }
   }
 
   const changeAltitude = (polygon) => {
-    if(polygon.name === "world") return 0.001
-    if( clickedPolygon === polygon.name ){
+    if (polygon.name === "world") {
+      return 0.001
+    }
+    for (const fish of fishArea) {
+      if (fish.area === polygon.name) {
+        return 0.15
+      }
+    }
+    if (clickedPolygon === polygon.name) {
       return 0.1
-    }else{
+    } else {
       return 0.04
     }
   }
@@ -63,6 +104,10 @@ export default function GlobeMap() {
         onPolygonClick={(polygon) => {
           console.log(polygon)
           if (polygon != null)
+            if(polygon.name === "world"){
+              fishArea.length = 0;
+              console.log(fishArea)
+            }
             setClickedPolygon(polygon.name)
         }}
       />
