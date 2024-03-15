@@ -8,7 +8,7 @@ export const setSearchedFishPolygon = (data) => {
   searchedFishPolygon = data;
 }
 
-export default function SearchBar() {
+export default function SearchBar({ setSideMoreInfoVisible, setFishName, setFishData, setFishImageSource }) {
     const [inputValue, setInputValue] = useState("");
     const [suggestionText, setSuggestionText] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -17,6 +17,11 @@ export default function SearchBar() {
     const handleKeyPress = async (event) => {
       if (event.key === 'Enter') {
         searchedFishPolygon = await fetchSearchData(inputValue)
+        console.log(searchedFishPolygon);
+        setSideMoreInfoVisible(true);
+        setFishName(searchedFishPolygon[1].scientificName);
+        setFishData(searchedFishPolygon[1].description);
+        setFishImageSource(searchedFishPolygon[1].image);
       }
     };
   
