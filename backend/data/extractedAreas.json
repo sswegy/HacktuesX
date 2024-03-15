@@ -1,4 +1,4 @@
-const coordinates = {
+{
     "sergasso-sea": [
         [
             -62.13139845179505,
@@ -16790,5 +16790,3 @@ const coordinates = {
         ]
     ]
 }
-
-export default coordinates;
