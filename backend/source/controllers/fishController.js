@@ -20,21 +20,21 @@ export async function getFishByArea(area) {
 }
 
 export async function getCommonFishOrder(area, type) {
-    const query = `SELECT scientificName, COUNT(*) AS occurrences FROM fishes WHERE area = ? GROUP BY scientificName ORDER BY occurrences ? LIMIT 50`
+    const query = `SELECT DISTINCT scientificName, COUNT(*) AS occurrences FROM fishes WHERE area = ? GROUP BY scientificName ORDER BY occurrences ? LIMIT 50`
     
     const [result] = await pool.query(query, [area, type])
-    return result[0]
+    return result
 }
 
 export async function getAlphabeticalFishOrder(area, type) {
-    const query = `SELECT scientificName FROM fishes WHERE area = ? ORDER BY scientificName ? LIMIT 50`
+    const query = `SELECT DISTINCT scientificName FROM fishes WHERE area = ? ORDER BY scientificName ? LIMIT 50`
     
     const [result] = await pool.query(query, [area, type])
-    return result[0]
+    return result
 }
 
 export async function getFishByDepthRange(area, fromDepth, toDepth, type) {
-    let query = `SELECT scientificName, depth FROM fishes WHERE area = ?`
+    let query = `SELECT DISTINCT scientificName, depth FROM fishes WHERE area = ?`
     const params = [area]
 
     if (fromDepth !== undefined && toDepth !== undefined) {
@@ -49,17 +49,17 @@ export async function getFishByDepthRange(area, fromDepth, toDepth, type) {
 }
 
 export async function getFishByDepth(area, type) {
-    const query = `SELECT scientificName, depth FROM fishes WHERE area = ? ORDER BY depth ? LIMIT 50`
+    const query = `SELECT DISTINCT scientificName, depth FROM fishes WHERE area = ? ORDER BY depth ? LIMIT 50`
     const [result] = await pool.query(query, [area, type])
     return result
 }
 
 export async function getAreasAndFishByName(name) {
-    const query_area = "SELECT area WHERE name = ?"
-    const query_fish = "SELECT * WHERE name = ? LIMIT 1"
+    const query_area = "SELECT area FROM fishes WHERE scientificName = ?"
+    const query_fish = "SELECT * FROM fishes WHERE scientificName = ? LIMIT 1"
     
     let [result_area] = await pool.query(query_area, [name])
-    result_area = array.filter((item, index) => result_area.indexOf(item) === index);
+    result_area = result_area.filter((item, index) => result_area.indexOf(item) === index);
 
     let [result_fish] = await pool.query(query_fish, [name])
 
