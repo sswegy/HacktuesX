@@ -1,5 +1,5 @@
 import { useState } from "react";
-import suggestAutoFill from "../../../backend/data/suggestAutoFill";
+import suggestAutoFill from "../utility/suggestAutoFill.js";
 
 
 export default function SearchBar() {
@@ -13,12 +13,14 @@ export default function SearchBar() {
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    console.log(suggestAutoFill(inputValue, "unique_names.json"))
+    if (event.target.value.length > 1) {
+      console.log(suggestAutoFill(inputValue));
+    }
   };
 
 
   return (
-    <>
+    <div className="searchBarDiv">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="search-svg-icon bi-search"
@@ -33,6 +35,6 @@ export default function SearchBar() {
         onKeyPress={handleKeyPress}
         onChange={handleInputChange}
       />
-    </>
+    </div>
   );
 }
