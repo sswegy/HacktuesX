@@ -23,14 +23,14 @@ export async function getCommonFishOrder(area, type) {
     const query = `SELECT scientificName, COUNT(*) AS occurrences FROM fishes WHERE area = ? GROUP BY scientificName ORDER BY occurrences ? LIMIT 50`
     
     const [result] = await pool.query(query, [area, type])
-    return result[0]
+    return result
 }
 
 export async function getAlphabeticalFishOrder(area, type) {
     const query = `SELECT scientificName FROM fishes WHERE area = ? ORDER BY scientificName ? LIMIT 50`
     
     const [result] = await pool.query(query, [area, type])
-    return result[0]
+    return result
 }
 
 export async function getFishByDepthRange(area, fromDepth, toDepth, type) {
