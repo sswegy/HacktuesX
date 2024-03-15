@@ -20,7 +20,7 @@ export default function SearchBar() {
 
 
   return (
-    <>
+    <div className="searchBarDiv">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="search-svg-icon bi-search"
@@ -35,6 +35,6 @@ export default function SearchBar() {
         onKeyPress={handleKeyPress}
         onChange={handleInputChange}
       />
-    </>
+    </div>
   );
 }

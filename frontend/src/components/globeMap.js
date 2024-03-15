@@ -86,8 +86,10 @@ export default function GlobeMap() {
     <Globe
       ref={globeRef}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-      width={width * 95 / 100}
-      backgroundColor="#1A1E2E"
+      width={width}
+      height={height}
+      backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
+      //backgroundColor="#1A1E2E"
 
         polygonsData={polygons}
         polygonGeoJsonGeometry={(polygon) => polygon.geometry}
