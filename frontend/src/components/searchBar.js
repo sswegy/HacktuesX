@@ -1,5 +1,5 @@
 import { useState } from "react";
-import suggestAutoFill from "../../../backend/data/suggestAutoFill";
+import suggestAutoFill from "../utility/suggestAutoFill.js";
 
 
 export default function SearchBar() {
@@ -13,7 +13,9 @@ export default function SearchBar() {
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    console.log(suggestAutoFill(inputValue, "unique_names.json"))
+    if (event.target.value.length > 1) {
+      console.log(suggestAutoFill(inputValue));
+    }
   };
 
 

@@ -52,7 +52,6 @@ export default function GlobeMap() {
     }
 
     for (const fish of fishArea) {
-      console.log(fish)
       if (fish.area === polygon.name) {
         return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.8 + ")"
       }
@@ -101,11 +100,9 @@ export default function GlobeMap() {
             setHoveredPolygon(polygon.name)
         }}
         onPolygonClick={(polygon) => {
-          console.log(polygon)
           if (polygon != null){
             if(polygon.name === "world"){
               fishArea.length = 0;
-              console.log(fishArea)
             }
             setClickedPolygon(polygon.name)
           }
