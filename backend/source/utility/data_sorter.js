@@ -1,11 +1,13 @@
-import fs from 'fs';
-import getImageAndDescription from '../source/utility/infoFinder.js'
-import coordinates from './coordinates.js';
+import fs from 'fs'
+import getImageAndDescription from './infoFinder.js'
+import coordinates from '../../data/coordinates.js'
 import turf from "turf"
-import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
-import createFish from '../source/controllers/fishController.js'
-import { type } from 'os';
-import { unsubscribe } from 'diagnostics_channel';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
+import createFish from '../controllers/fishController.js'
+import { type } from 'os'
+import { unsubscribe } from 'diagnostics_channel'
+
+
 fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
     
     if (err) {
