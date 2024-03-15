@@ -1,5 +1,7 @@
 import suggestAutoFill from "../utility/suggestAutoFill.js";
 import React, { useState, useRef } from 'react';
+import {fetchSearchData} from "../utility/requestHandler.js";
+
 
 
 export default function SearchBar() {
@@ -10,7 +12,7 @@ export default function SearchBar() {
   
     const handleKeyPress = (event) => {
       if (event.key === 'Enter') {
-        alert(event.target.value);
+        console.log(fetchSearchData(inputValue)[0])
       }
     };
   

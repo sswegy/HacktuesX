@@ -4,7 +4,7 @@ import polygons from "./polygons.js";
 import areaNames from "../data/areaNameMap.js"
 import {fetchSearchData} from "../utility/requestHandler.js"
 
-let fishArea = [{
+let fishArea = [/*{
   "scientificName": "Antennatus sanguineus ",
   "decimalLatitude": "24.333333",
   "decimalLongitude": "-109.95",
@@ -25,7 +25,7 @@ let fishArea = [{
   "area": "north-pacific-middle",
   "image": "kuri_mi",
   "description": "qj go"
-}]
+}*/]
 
 
 export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
