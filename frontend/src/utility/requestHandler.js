@@ -1,7 +1,8 @@
 import axios from 'axios';
-import process from "../../../backend/process.js"
+//import process from "../../../backend/process.js"
 
-const baseURL = `${process.host}:${process.PORT}`
+//const baseURL = `${process.host}:${process.PORT}`
+const baseURL = `192.168.1.46:3000`
 
 export async function fetchSearchData(name) {
     try {

@@ -2,29 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
 import polygons from "./polygons.js";
 import areaNames from "../data/areaNameMap.js"
-
-let fishArea = [{
-  "scientificName": "Antennatus sanguineus ",
-  "decimalLatitude": "24.333333",
-  "decimalLongitude": "-109.95",
-  "locality": "Punta norte de Isla Cerralvo, B.C.S.",
-  "depth": "3.0",
-  "depthAccuracy": "unspecified",
-  "area": "north-pacific-north",
-  "image": "kuri_mi",
-  "description": "qj go"
-},
-{
-  "scientificName": "Antennatus sanguineus ",
-  "decimalLatitude": "24.333333",
-  "decimalLongitude": "-109.95",
-  "locality": "Punta norte de Isla Cerralvo, B.C.S.",
-  "depth": "3.0",
-  "depthAccuracy": "unspecified",
-  "area": "north-pacific-middle",
-  "image": "kuri_mi",
-  "description": "qj go"
-}]
+import { searchedFishPolygon, setSearchedFishPolygon } from "./searchBar.js";
 
 
 export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
@@ -48,12 +26,16 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
     };
   }, []);
 
+  const getKeyByValue = (object, value) => {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
   const changePolygonColor = (polygon) => {
     if (polygon.name === "world") {
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.01 + ")"
     }
 
-    for (const fish of fishArea) {
+    for (const fish of searchedFishPolygon[0]) {
       if (areaNames[fish.area] === polygon.name) {
         return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.8 + ")"
       }
@@ -72,7 +54,7 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
     if (polygon.name === "world") {
       return 0.001
     }
-    for (const fish of fishArea) {
+    for (const fish of searchedFishPolygon[0]) {
       if (areaNames[fish.area] === polygon.name) {
         return 0.15
       }
@@ -104,16 +86,16 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
           setHoveredPolygon(polygon.name)
       }}
       onPolygonClick={(polygon) => {
-        console.log(polygon)
         if (polygon != null) {
           if (polygon.name === "world") {
-            fishArea.length = 0;
-            console.log(fishArea)
+            searchedFishPolygon[0].length = 0;
+            console.log(searchedFishPolygon[0])
             setSideInfoVisible(false);
             setWidth(window.innerWidth);
           }
           else
             setSideInfoVisible(true);
+          setSearchedFishPolygon([[],null])
           setClickedPolygon(polygon.name);
           setCurrentPolygonName(polygon.name);
         }
