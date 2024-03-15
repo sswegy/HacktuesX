@@ -3,9 +3,13 @@ import Globe from "react-globe.gl";
 import polygons from "./polygons.js";
 import areaNames from "../data/areaNameMap.js"
 import { searchedFishPolygon, setSearchedFishPolygon } from "./searchBar.js";
+import { fetchSideBarData } from "../utility/requestHandler.js";
 
 
-export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
+export let polygonSelectResult = {};
+export const setPolygonSelectResult = (data) => { polygonSelectResult = data; }
+
+export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [hoveredPolygon, setHoveredPolygon] = useState("");
@@ -66,6 +70,10 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
     }
   }
 
+  const handlePolygonClickRequest = async (polygon) => {
+    setPolygonSelectResult(await fetchSideBarData(getKeyByValue(areaNames, polygon.name)));
+  }
+  
   return (
     <Globe
       ref={globeRef}
@@ -95,9 +103,10 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
           }
           else
             setSideInfoVisible(true);
-          setSearchedFishPolygon([[],null])
+          setSearchedFishPolygon([[], null])
           setClickedPolygon(polygon.name);
           setCurrentPolygonName(polygon.name);
+          handlePolygonClickRequest(polygon);
         }
       }}
     />

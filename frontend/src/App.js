@@ -3,20 +3,28 @@ import React, { useState } from "react";
 import GlobeMap from "./components/globeMap.js";
 import SearchBar from "./components/searchBar.js";
 import SideInfoBar from "./components/sideInfoBar.js";
-import SideInfoCell from "./components/sideInfoCell.js";
-import FishImage from "./data/dummy/fish.png";
 import SideMoreInfoBar from "./components/sideMoreInfoBar.js";
+import SideInfoCell from "./components/sideInfoCell.js";
+import { polygonSelectResult } from "./components/globeMap.js";
+
+
 
 function App() {
   const [sideInfoVisible, setSideInfoVisible] = useState(false);
-  const [sideMoreInfoVisible, setSideMoreInfoVisible] = useState(false);
+  const [sideMoreInfoVisible, setSideMoreInfoVisible] = useState({fishInfo: {}, isVisible: false});
   const [currentPolygonName, setCurrentPolygonName] = useState("");
+  const [fishName, setFishName] = useState("");
+  const [fishData, setFishData] = useState("");
+  const [fishImageSource, setFishImageSource] = useState("");
 
+  
+  console.log(sideMoreInfoVisible);
+  console.log(polygonSelectResult);
 
   return (
     <div className="container">
       <div className="searchbar-container">
-        <SearchBar />
+        <SearchBar setSideMoreInfoVisible={setSideMoreInfoVisible} setFishData={setFishData} setFishImageSource={setFishImageSource} setFishName={setFishName} />
       </div>
       <div className="content-container">
         <div className="globemap-container">
@@ -24,15 +32,13 @@ function App() {
         </div>
         {sideInfoVisible ?
           <SideInfoBar oceanName={currentPolygonName}>
-            <SideInfoCell fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
-            <SideInfoCell fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
-            <SideInfoCell fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
-            <SideInfoCell fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
-            <SideInfoCell fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
+            {polygonSelectResult.map((item) => (
+              <SideInfoCell fishName={item.scientificName} fishImageSource={item.image} sideMoreInfoVisible={sideMoreInfoVisible} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
+            ))}
           </SideInfoBar>
           : <></>}
-        {sideMoreInfoVisible ?
-          <SideMoreInfoBar fishData={"This is a default fish, found everywhere"} fishImageSource={FishImage} fishName={"рыба"} setSideMoreInfoVisible={setSideMoreInfoVisible}/> : <></>}
+        {sideMoreInfoVisible.isVisible ?
+          <SideMoreInfoBar fishData={sideMoreInfoVisible.fishInfo.description} fishImageSource={sideMoreInfoVisible.fishInfo.description} fishName={sideMoreInfoVisible.fishInfo.scientificName} setSideMoreInfoVisible={setSideMoreInfoVisible} /> : <></>}
       </div>
     </div>
   );

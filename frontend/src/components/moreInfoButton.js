@@ -1,6 +1,6 @@
-export default function MoreInfoButton({ setSideMoreInfoVisible }) {
+export default function MoreInfoButton({ sideMoreInfoVisible, setSideMoreInfoVisible }) {
     const handleClick = () => {
-        setSideMoreInfoVisible(true);
+        setSideMoreInfoVisible({...sideMoreInfoVisible}, true);
     }
     return (
         <>
