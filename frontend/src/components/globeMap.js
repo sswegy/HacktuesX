@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
 import polygons from "./polygons.js";
+import areaNames from "../data/areaNameMap.js"
 
 let fishArea = [{
   "scientificName": "Antennatus sanguineus ",
@@ -9,7 +10,7 @@ let fishArea = [{
   "locality": "Punta norte de Isla Cerralvo, B.C.S.",
   "depth": "3.0",
   "depthAccuracy": "unspecified",
-  "area": "antarctic-north-coast",
+  "area": "north-pacific-north",
   "image": "kuri_mi",
   "description": "qj go"
 },
@@ -20,7 +21,7 @@ let fishArea = [{
   "locality": "Punta norte de Isla Cerralvo, B.C.S.",
   "depth": "3.0",
   "depthAccuracy": "unspecified",
-  "area": "South America West Coast",
+  "area": "north-pacific-middle",
   "image": "kuri_mi",
   "description": "qj go"
 }]
@@ -53,7 +54,7 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
     }
 
     for (const fish of fishArea) {
-      if (fish.area === polygon.name) {
+      if (areaNames[fish.area] === polygon.name) {
         return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.8 + ")"
       }
     }
@@ -72,7 +73,7 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
       return 0.001
     }
     for (const fish of fishArea) {
-      if (fish.area === polygon.name) {
+      if (areaNames[fish.area] === polygon.name) {
         return 0.15
       }
     }
