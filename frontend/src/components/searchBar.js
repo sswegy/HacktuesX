@@ -22,6 +22,11 @@ export default function SearchBar() {
     }
   };
 
+  const fillSearchBar = (item) => {
+    setInputValue(item)
+    setSuggestionText([]);
+  }
+
 
   return (
     <>
@@ -44,7 +49,7 @@ export default function SearchBar() {
           <tbody>
             {suggestionText.map((item, index) => (
               <tr key={index}>
-                <td className="searchTableElement" onClick={() => {setInputValue(item)}}>{item}</td>
+                <td className="searchTableElement" onClick={() => {fillSearchBar(item)}}>{item}</td>
               </tr>
             ))}
           </tbody>
