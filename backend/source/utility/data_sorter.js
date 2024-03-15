@@ -48,7 +48,7 @@ fs.readFile('../../data/extractedData.json', 'utf8',async (err, data) => {
                    {
                     jsonData[i]["depthAccuracy"] = 0;
                    }
-                    createFish(jsonData[i]["scientificName"], Number(jsonData[i]["decimalLatitude"]), Number(jsonData[i]["decimalLongitude"]), jsonData[i]["locality"], jsonData[i]["depth"], jsonData[i]["depthAccuracy"], obj.description, obj.image, key)
+                    await createFish(jsonData[i]["scientificName"], Number(jsonData[i]["decimalLatitude"]), Number(jsonData[i]["decimalLongitude"]), jsonData[i]["locality"], jsonData[i]["depth"], jsonData[i]["depthAccuracy"], obj.description, obj.image, key)
                 }
             }
         }

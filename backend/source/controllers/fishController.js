@@ -2,7 +2,7 @@ import pool from "../database/database.js"
 
 
 // GET
- export async function getFishes() {
+export async function getFishes() {
     const [results] = await pool.query("SELECT * FROM fishes")
     return results
 }
