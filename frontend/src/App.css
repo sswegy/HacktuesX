@@ -21,7 +21,7 @@ body {
 	top: 0;
 	z-index: 999;
 	height: 10%;
-	width: 95%;
+	width: 100%;
 }
 
 .searchBarDiv {
@@ -69,7 +69,8 @@ body {
 }
 
 .content-container {
-	position: relative;
+	position: absolute;
+	z-index: 1;
 }
 
 .globemap-container {
