@@ -378,7 +378,7 @@ const polygons = [
             coordinates: [coordinates["java-sea"]]
         },
         name: "Java Sea",
-        color: colors[39]
+        color: colors[21]
     },
     {
         type: "Feature",
