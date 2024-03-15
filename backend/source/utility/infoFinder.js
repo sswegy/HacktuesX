@@ -1,5 +1,9 @@
-import axios from 'axios'
+import axios from 'axios';
 
+// Function to delay execution by a specified amount of time
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 async function fetchDescription(query) {
     const baseUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary'
@@ -20,6 +24,8 @@ export default async function getImageAndDescription(query) {
     const endpoint = `${baseUrl}?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${encodeURIComponent(query)}`
 
     try {
+        // Introduce a delay of 1 second between each request
+        await delay(500); // 1000 milliseconds = 1 second
         const response = await axios.get(endpoint);
         const firstItem = response.data.items[0];
         if (firstItem) {
@@ -34,5 +40,3 @@ export default async function getImageAndDescription(query) {
         console.error('Error fetching images:', error)
     }
 }
-
-getImageAndDescription('Periophthalmus barbarus').then(item => {console.log(item.description)})

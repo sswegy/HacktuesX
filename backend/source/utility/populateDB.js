@@ -11,6 +11,7 @@ function populateDB(file) {
     
         let jsonData = JSON.parse(data)
         for (let i = 0; i < jsonData.length; i++) {
+            console.log(jsonData[i]);
             let obj = jsonData[i]
             let item = await getImageAndDescription(obj.scientificName)
         
