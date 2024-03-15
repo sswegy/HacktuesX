@@ -8,7 +8,8 @@ import {
     getFishByDepth,
     createFish,
     updateFishByID,
-    getAreasAndFishByName
+    getAreasAndFishByName,
+    getFishByArea
 } from '../controllers/fishController.js';
 
 const router = express.Router();
@@ -31,9 +32,9 @@ router.get('/id/:id', async (req, res) => {
     }
 });
 
-router.get('/area', async (req, res) => {
+router.get('/area/:area', async (req, res) => {
     try {
-        const { area } = req.body;
+        const  area  = req.params.area;
         const fish = await getFishByArea(area);
         res.json(fish);
     } catch (error) {

@@ -1,8 +1,8 @@
 import fishesRoute from './source/routes/fishRouter.js';
 import express from "express"
-
+import process from "./process.js"
 const app = express();
-const port = process.env.port;
+const port = process.PORT;
 
 app.use('/fishes', fishesRoute);
 
