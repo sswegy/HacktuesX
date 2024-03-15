@@ -1,7 +1,5 @@
 import axios from 'axios'
-import dotenv from 'dotenv'
-
-dotenv.config()
+import process from '../../process.js';
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -20,13 +18,14 @@ async function fetchDescription(query) {
 }
 
 export default async function getImageAndDescription(query) {
-    const apiKey = process.env.apiKey
-    const searchEngineId = process.env.searchEngineId
+    
+    const apiKey = process.apiKey
+    const searchEngineId = process.searchEngineID
     const baseUrl = 'https://www.googleapis.com/customsearch/v1'
     const endpoint = `${baseUrl}?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${encodeURIComponent(query)}`
 
     try {
-        await delay(250);
+        await delay(500);
         const response = await axios.get(endpoint);
         const firstItem = response.data.items[0];
         if (firstItem) {

@@ -64,3 +64,5 @@ export async function updateFishByID(id, scientificName, decimalLatitude, decima
     )
     return result
 }
+
+export default createFish;

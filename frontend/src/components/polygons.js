@@ -461,15 +461,6 @@ const polygons = [
         name: "north-pacific-north",
         color: colors[48]
     },
-    {
-        type: "Feature",
-        geometry: {
-            type: "Polygon",
-            coordinates: [coordinates["north-pacific-middle"]]
-        },
-        name: "north-pacific-middle",
-        color: colors[0]
-    },
     
 ];
 
