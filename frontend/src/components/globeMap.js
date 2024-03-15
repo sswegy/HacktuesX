@@ -26,7 +26,7 @@ let fishArea = [{
 }]
 
 
-export default function GlobeMap({ setSideInfoVisible }) {
+export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [hoveredPolygon, setHoveredPolygon] = useState("");
@@ -109,14 +109,12 @@ export default function GlobeMap({ setSideInfoVisible }) {
             fishArea.length = 0;
             console.log(fishArea)
             setSideInfoVisible(false);
-            setWidth(window.innerWidth * 95/100);
+            setWidth(window.innerWidth);
           }
           else
-          {
             setSideInfoVisible(true);
-            setWidth(window.innerWidth  * 6/10);
-          }
-            setClickedPolygon(polygon.name);
+          setClickedPolygon(polygon.name);
+          setCurrentPolygonName(polygon.name);
         }
       }}
     />
