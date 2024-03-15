@@ -81,7 +81,7 @@ const polygons = [
             coordinates: [coordinates["midle-atlantic-ocean"]]
         },
         name: "Atlantic Ocean - Middle",
-        color: colors[6]
+        color: colors[31]
     },
     {
         type: "Feature",
@@ -224,7 +224,7 @@ const polygons = [
             type: "Polygon",
             coordinates: [coordinates["antarctic-atlantic-coast"]]
         },
-        name: "Antarctica North Coast",
+        name: "Antarctica Atlantic Coast",
         color: colors[22]
     },
     {
