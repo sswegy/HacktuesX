@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 
-function suggestAutoFill(inputString, filename = 'strings.json', numSuggestions = 5) {
+export default function suggestAutoFill(inputString, filename = 'strings.json', numSuggestions = 5) {
     try {
         const jsonString = readFileSync(filename, 'utf8');
         const jsonArray = JSON.parse(jsonString);
@@ -12,6 +12,3 @@ function suggestAutoFill(inputString, filename = 'strings.json', numSuggestions 
         return [];
     }
 }
-
-
-console.log(suggestAutoFill("dario", "unique_names.json"))

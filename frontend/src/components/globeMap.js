@@ -102,13 +102,13 @@ export default function GlobeMap() {
         }}
         onPolygonClick={(polygon) => {
           console.log(polygon)
-          if (polygon != null)
+          if (polygon != null){
             if(polygon.name === "world"){
               fishArea.length = 0;
               console.log(fishArea)
             }
             setClickedPolygon(polygon.name)
-            setSideInfoVisible(true);
+          }
         }}
       />
   );
