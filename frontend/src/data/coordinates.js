@@ -6411,7 +6411,7 @@ const coordinates = {
             15.791563682077594
         ]
     ],
-    "undefined": [
+    "south-america-west-coast": [
         [
             -80.29384334732728,
             6.920607068562717
