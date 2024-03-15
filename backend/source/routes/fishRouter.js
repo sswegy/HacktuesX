@@ -7,8 +7,9 @@ import {
     getFishByDepthRange,
     getFishByDepth,
     createFish,
-    updateFishByID
-} from './fishController.js';
+    updateFishByID,
+    getAreasAndFishByName
+} from '../controllers/fishController.js';
 
 const router = express.Router();
 
@@ -65,6 +66,16 @@ router.get('/byDepth', async (req, res) => {
         const { area, type } = req.query;
         const fishByDepth = await getFishByDepth(area, type);
         res.json(fishByDepth);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/areaFishByName/:name', async (req, res) => {
+    try {
+        const {name} = req.params.name
+        const areasFish = await getAreasAndFishByName(name)
+        res.json(areasFish);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
