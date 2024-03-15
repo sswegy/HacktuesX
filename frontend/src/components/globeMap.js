@@ -26,11 +26,12 @@ let fishArea = [{
 }]
 
 
-export default function GlobeMap() {
+export default function GlobeMap({ setSideInfoVisible }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [hoveredPolygon, setHoveredPolygon] = useState("");
   const [clickedPolygon, setClickedPolygon] = useState("");
+
   const globeRef = useRef(null);
 
   useEffect(() => {
@@ -91,24 +92,33 @@ export default function GlobeMap() {
       backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
       //backgroundColor="#1A1E2E"
 
-        polygonsData={polygons}
-        polygonGeoJsonGeometry={(polygon) => polygon.geometry}
-        polygonAltitude={(polygon) => { return changeAltitude(polygon) }}
-        polygonSideColor={(polygon) => { return changePolygonColor(polygon) }}
-        polygonStrokeColor={(polygon) => { return '#000000'; }}
-        polygonCapColor={(polygon) => { return changePolygonColor(polygon) }}
-        onPolygonHover={(polygon) => {
-          if (polygon != null)
-            setHoveredPolygon(polygon.name)
-        }}
-        onPolygonClick={(polygon) => {
-          if (polygon != null){
-            if(polygon.name === "world"){
-              fishArea.length = 0;
-            }
-            setClickedPolygon(polygon.name)
+      polygonsData={polygons}
+      polygonGeoJsonGeometry={(polygon) => polygon.geometry}
+      polygonAltitude={(polygon) => { return changeAltitude(polygon) }}
+      polygonSideColor={(polygon) => { return changePolygonColor(polygon) }}
+      polygonStrokeColor={(polygon) => { return '#000000'; }}
+      polygonCapColor={(polygon) => { return changePolygonColor(polygon) }}
+      onPolygonHover={(polygon) => {
+        if (polygon != null)
+          setHoveredPolygon(polygon.name)
+      }}
+      onPolygonClick={(polygon) => {
+        console.log(polygon)
+        if (polygon != null) {
+          if (polygon.name === "world") {
+            fishArea.length = 0;
+            console.log(fishArea)
+            setSideInfoVisible(false);
+            setWidth(window.innerWidth * 95/100);
           }
-        }}
-      />
+          else
+          {
+            setSideInfoVisible(true);
+            setWidth(window.innerWidth  * 6/10);
+          }
+            setClickedPolygon(polygon.name);
+        }
+      }}
+    />
   );
 }

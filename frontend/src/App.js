@@ -8,10 +8,6 @@ import SideInfoBar from "./components/sideInfoBar.js";
 function App() {
   const [sideInfoVisible, setSideInfoVisible] = useState(false);
 
-  const showSideInfo = () => {
-    setSideInfoVisible(!sideInfoVisible);
-  }
-
   return (
     <div className="container">
       <div className="searchbar-container">
@@ -19,11 +15,9 @@ function App() {
       </div>
       <div className="content-container">
         <div className="globemap-container">
-          <GlobeMap SideInfoVisible={sideInfoVisible} setSideInfoVisible={showSideInfo} />
+          <GlobeMap setSideInfoVisible={setSideInfoVisible} />
         </div>
-        <div className="side-info-bar-container">
-          {sideInfoVisible ? <SideInfoBar /> : <></>}
-        </div>
+        {sideInfoVisible ? <SideInfoBar oceanName={"iwanegrow"} /> : <></>}
       </div>
     </div>
   );
