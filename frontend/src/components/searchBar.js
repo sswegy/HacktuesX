@@ -2,7 +2,11 @@ import suggestAutoFill from "../utility/suggestAutoFill.js";
 import React, { useState, useRef } from 'react';
 import {fetchSearchData} from "../utility/requestHandler.js";
 
+export let searchedFishPolygon = [[],null];
 
+export const setSearchedFishPolygon = (data) => {
+  searchedFishPolygon = data;
+}
 
 export default function SearchBar() {
     const [inputValue, setInputValue] = useState("");
@@ -10,9 +14,9 @@ export default function SearchBar() {
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const suggestionsListRef = useRef(null);
   
-    const handleKeyPress = (event) => {
+    const handleKeyPress = async (event) => {
       if (event.key === 'Enter') {
-        console.log(fetchSearchData(inputValue)[0])
+        searchedFishPolygon = await fetchSearchData(inputValue)
       }
     };
   
