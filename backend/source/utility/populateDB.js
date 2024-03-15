@@ -2,8 +2,8 @@ import fs from 'fs'
 import getImageAndDescription from './infoFinder.js'
 
 
-function populateDB() {
-    fs.readFile('../../data/extractedData.json', 'utf8', async (err, data) => {
+function populateDB(file) {
+    fs.readFile(file, 'utf8', async (err, data) => {
         if (err) {
             console.error('Error reading file:', err)
             return
@@ -27,4 +27,4 @@ function populateDB() {
     })
 }
 
-populateDB()
+populateDB('../../data/extractedData.json')
