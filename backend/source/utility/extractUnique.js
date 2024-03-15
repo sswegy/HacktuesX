@@ -1,6 +1,6 @@
 import fs from "fs"; 
 
-function getUniqueScientificNames(filePath) {
+function getUniqueScientificNames(filePtah) {
     try {
         const data = fs.readFileSync(filePath);
         const jsonData = JSON.parse(data);
@@ -38,3 +38,4 @@ fs.writeFile(outputFilePath, uniqueNamesJSON, (err) => {
     }
     console.log(`Unique scientific names saved to ${outputFilePath}`);
 });
+export default getUniqueScientificNames

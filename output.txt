@@ -1,5 +1,4 @@
-const unique_names = [
-  "Lutjanus analis",
+"Lutjanus analis",
 "Scomberomorus cavalla",
 "Sparisoma aurofrenatum",
 "Symphurus plagiusa",
@@ -2769,8 +2768,4 @@ const unique_names = [
 "Chatrabus melanurus",
 "Lagocephalus lagocephalus",
 "Ophichthus triserialis",
-"Dysomma brevirostre"
-]
-
-
-export default unique_names;
+"Dysomma brevirostre",
