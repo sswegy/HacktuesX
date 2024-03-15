@@ -2,31 +2,31 @@ import pool from "../database/database.js"
 
 
 // GET
- async function getFishes() {
+ export async function getFishes() {
     const [results] = await pool.query("SELECT * FROM fishes")
     return results
 }
 
-async function getFishByID(id) {
+export async function getFishByID(id) {
     const [result] = await pool.query("SELECT * FROM fishes WHERE id = ?", [id])
     return result[0]
 }
 
-async function getCommonFishOrder(area, type) {
+export async function getCommonFishOrder(area, type) {
     const query = `SELECT scientificName, COUNT(*) AS occurrences FROM fishes WHERE area = ? GROUP BY scientificName ORDER BY occurrences ? LIMIT 50`
     
     const [result] = await pool.query(query, [area, type])
     return result[0]
 }
 
-async function getAlphabeticalFishOrder(area, type) {
+export async function getAlphabeticalFishOrder(area, type) {
     const query = `"SELECT scientificName FROM fishes WHERE area = ? ORDER BY scientificName ? LIMIT(50)"`
     
     const [result] = await pool.query(query, [area, type])
     return result[0]
 }
 
-async function getFishByDepthRange(area, fromDepth, toDepth, type) {
+export async function getFishByDepthRange(area, fromDepth, toDepth, type) {
     let query = `SELECT scientificName, depth FROM fishes WHERE area = ?`
     const params = [area]
 
@@ -41,14 +41,14 @@ async function getFishByDepthRange(area, fromDepth, toDepth, type) {
     return result
 }
 
-async function getFishByDepth(area, type) {
+export async function getFishByDepth(area, type) {
     const query = `SELECT scientificName, depth FROM fishes WHERE area = ? ORDER BY depth ? LIMIT(50)`
     const [result] = await pool.query(query, [area, type])
     return result
 }
 
 // POST
-async function createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area) {
+export async function createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area) {
     const result = await pool.query(
         "INSERT INTO fishes (scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area]
@@ -57,12 +57,10 @@ async function createFish(scientificName, decimalLatitude, decimalLongitude, loc
 }
 
 // PUT
-async function updateFishByID(id, scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy) {
+export async function updateFishByID(id, scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy) {
     const result = await pool.query(
         "UPDATE fishes SET scientificName = ?, decimalLatitude = ?, decimalLongitude = ?, locality = ?, depth = ?, depthAccuracy = ? WHERE id = ?",
         [scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, id]
     )
     return result
 }
-
-export default createFish

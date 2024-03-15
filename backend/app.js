@@ -1,10 +1,10 @@
-import productRoutes from './source/routes/fishRouter.js';
+import fishesRoute from './source/routes/fishRouter.js';
 import express from "express"
-import pool from './source/database/database.js';
-const app = express();
-const port = 8080;
 
-app.use('/', productRoutes);
+const app = express();
+const port = process.env.port;
+
+app.use('/fishes', fishesRoute);
 
 
 app.listen(
