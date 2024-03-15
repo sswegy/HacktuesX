@@ -7,12 +7,14 @@ import createFish from '../source/controllers/fishController.js'
 import { type } from 'os';
 import { unsubscribe } from 'diagnostics_channel';
 fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
+    
     if (err) {
         console.error('Error reading file:', err);
         return;
     }
-    
     try {
+        
+    console.time("dbstart");    
         // Parse JSON data
         
         const jsonData = JSON.parse(data);
@@ -39,7 +41,6 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
             
                     obj.description = item.description
                     obj.image = item.url   
-                    console.log(obj.description,obj.image);
                     
                     //populating database
                    if(jsonData[i]["depth"] === 'unspecified')
@@ -56,7 +57,9 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
                 }
             }
         }
+        console.timeEnd("dbend");
     } catch (parseError) {
+        console.timeEnd("dbend");
         console.error('Error parsing JSON:', parseError);
     }
 });

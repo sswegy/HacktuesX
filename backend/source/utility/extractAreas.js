@@ -28,4 +28,4 @@ function extractAreas(inputFile, outputFile) {
     })
 }
 
-extractAreas('../../data/areas.json', '../../data/extractedAreas.json');
+extractAreas('../../data/areas.json', '../../data/extractedAreas.json')
