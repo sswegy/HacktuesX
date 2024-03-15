@@ -9,7 +9,5 @@ app.use('/', productRoutes);
 
 app.listen(
     port,
-    () => console.log("SERVER ALLIVE!!"),
-     // Insert example records into fishes table
-    kur()
+    () => console.log("SERVER ALLIVE!!")
 )
