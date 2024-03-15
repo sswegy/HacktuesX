@@ -55,11 +55,37 @@
 }
 
 .globemap-container {
-    flex: 1;
+    flex: 2;
     align-items: center;
 }
 
 .side-info-bar-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-items: center;
+	margin: 3px;
+	width: 30%;
+}
+
+.side-info-bar-title {
+	align-items: center;
+	text-align: center;
+	margin-top: 5px;
+	font-size: 15px;
+	width: 100%;
+	outline: none;
+	background: #1A1E2E;
+	color: #D7D9D7;
+	border: 1px solid #333f72;
+	border-radius: 7px;
+}
+
+.side-info-bar-cell {
+	flex: 1;
+	display: inline-block;
+	width: 100%;
+}
+
+.side-info-bar-image {
+	width: 400px;
 }
