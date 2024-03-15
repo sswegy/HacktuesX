@@ -1,6 +1,8 @@
-import axios from 'axios';
+import axios from 'axios'
+import dotenv from 'dotenv'
 
-// Function to delay execution by a specified amount of time
+dotenv.config()
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -13,19 +15,18 @@ async function fetchDescription(query) {
         const response = await axios.get(endpoint)
         return response.data.extract
     } catch (error) {
-        // console.error('Error fetching description:', error)
+        // console.log("error")
     }
 }
 
 export default async function getImageAndDescription(query) {
-    const apiKey = 'AIzaSyCilwwxSr_t0IND_CxVgkvCUlp0z2Tw3kw'
-    const searchEngineId = 'd1d8a77927442467a'
+    const apiKey = process.env.apiKey
+    const searchEngineId = process.env.searchEngineId
     const baseUrl = 'https://www.googleapis.com/customsearch/v1'
     const endpoint = `${baseUrl}?key=${apiKey}&cx=${searchEngineId}&searchType=image&q=${encodeURIComponent(query)}`
 
     try {
-        // Introduce a delay of 1 second between each request
-        await delay(250); // 1000 milliseconds = 1 second
+        await delay(250);
         const response = await axios.get(endpoint);
         const firstItem = response.data.items[0];
         if (firstItem) {

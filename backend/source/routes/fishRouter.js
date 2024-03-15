@@ -1,42 +1,94 @@
-import express from "express"
-import { getFishes, getFishByID, createFish, updateFishByID } from "../controllers/fishController.js"
+import express from 'express';
+import {
+    getFishes,
+    getFishByID,
+    getCommonFishOrder,
+    getAlphabeticalFishOrder,
+    getFishByDepthRange,
+    getFishByDepth,
+    createFish,
+    updateFishByID
+} from './fishController.js';
 
+const router = express.Router();
 
-const router = express.Router()
+router.get('/', async (req, res) => {
+    try {
+        const fishes = await getFishes();
+        res.json(fishes);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
+router.get('/id/:id', async (req, res) => {
+    try {
+        const fish = await getFishByID(req.params.id);
+        res.json(fish);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-// GET
-router.get("/", async (req, res) => {
-    const fishes = await getFishes()
-    res.status(200).send("fishes")
-})
+router.get('/common', async (req, res) => {
+    try {
+        const { area, type } = req.query;
+        const commonFishOrder = await getCommonFishOrder(area, type);
+        res.json(commonFishOrder);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-router.get("/:id", async (req, res) => {
-    const id = req.params.id
-    const fish = await getFishByID(id)
+router.get('/alphabetical', async (req, res) => {
+    try {
+        const { area, type } = req.query;
+        const alphabeticalFishOrder = await getAlphabeticalFishOrder(area, type);
+        res.json(alphabeticalFishOrder);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-    if (!fish)
-        return res.status(404).send({ message: "Fish not found" })
+router.get('/depth', async (req, res) => {
+    try {
+        const { area, fromDepth, toDepth, type } = req.query;
+        const fishByDepthRange = await getFishByDepthRange(area, fromDepth, toDepth, type);
+        res.json(fishByDepthRange);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-    res.status(200).send(fish)
-})
+router.get('/byDepth', async (req, res) => {
+    try {
+        const { area, type } = req.query;
+        const fishByDepth = await getFishByDepth(area, type);
+        res.json(fishByDepth);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-// POST
-router.post("/", async (req, res) => {
-    const { scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy } = req.body
-    const result = await createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy)
+router.post('/fishes', async (req, res) => {
+    try {
+        const { scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area } = req.body;
+        const result = await createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-    res.status(200).send({ message: "Fish created successfully" })
-})
+router.put('/id/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy } = req.body;
+        const result = await updateFishByID(id, scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-// PUT
-router.put("/:id", async (req, res) => {
-    const id = req.params.id
-    const { scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy } = req.body
-    const result = await updateFishByID(id, scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy)
-
-    res.status(200).send({ message: "Fish updated successfully" })
-})
-
-
-export default router
+export default router;

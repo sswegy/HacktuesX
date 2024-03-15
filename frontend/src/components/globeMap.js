@@ -53,7 +53,6 @@ export default function GlobeMap({ setSideInfoVisible }) {
     }
 
     for (const fish of fishArea) {
-      console.log(fish)
       if (fish.area === polygon.name) {
         return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.8 + ")"
       }
@@ -88,8 +87,10 @@ export default function GlobeMap({ setSideInfoVisible }) {
     <Globe
       ref={globeRef}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-      width={width * 95 / 100}
-      backgroundColor="#1A1E2E"
+      width={width}
+      height={height}
+      backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
+      //backgroundColor="#1A1E2E"
 
       polygonsData={polygons}
       polygonGeoJsonGeometry={(polygon) => polygon.geometry}
