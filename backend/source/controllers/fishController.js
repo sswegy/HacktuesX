@@ -47,6 +47,18 @@ export async function getFishByDepth(area, type) {
     return result
 }
 
+export async function getAreasAndFishByName(name) {
+    const query_area = "SELECT area WHERE name = ?"
+    const query_fish = "SELECT * WHERE name = ? LIMIT 1"
+    
+    let [result_area] = await pool.query(query_area, [name])
+    result_area = array.filter((item, index) => result_area.indexOf(item) === index);
+
+    let [result_fish] = await pool.query(query_fish, [name])
+
+    return [result_area, result_fish[0]]
+}
+
 // POST
 export async function createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area) {
     const result = await pool.query(
@@ -64,3 +76,5 @@ export async function updateFishByID(id, scientificName, decimalLatitude, decima
     )
     return result
 }
+
+export default createFish;

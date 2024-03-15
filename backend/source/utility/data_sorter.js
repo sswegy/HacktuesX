@@ -8,7 +8,7 @@ import { type } from 'os'
 import { unsubscribe } from 'diagnostics_channel'
 
 
-fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
+fs.readFile('../../data/extractedData.json', 'utf8',async (err, data) => {
     
     if (err) {
         console.error('Error reading file:', err);
@@ -22,13 +22,10 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
         const arr = Array.from(jsonData);
         for(let i = 0; i < jsonData.length; i++)
         {
-            
-            
             for(const key in coordinates)
             {   
                 if( pointInsidePolygon( jsonData[i]["decimalLatitude"],jsonData[i]["decimalLongitude"],coordinates[key]))
                 {
-                   
                     console.log(jsonData[i]["scientificName"]," in ",key);
                     
                     let obj = jsonData[i]
@@ -52,8 +49,6 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
                     jsonData[i]["depthAccuracy"] = 0;
                    }
                     createFish(jsonData[i]["scientificName"], Number(jsonData[i]["decimalLatitude"]), Number(jsonData[i]["decimalLongitude"]), jsonData[i]["locality"], jsonData[i]["depth"], jsonData[i]["depthAccuracy"], obj.description, obj.image, key)
-                    
-
                 }
             }
         }
@@ -63,6 +58,7 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
         console.error('Error parsing JSON:', parseError);
     }
 });
+
 function pointInsidePolygon(latitude, longitude, polygon) {
     const BoundaryPolygon = turf.polygon([polygon]);
     const point = turf.point([longitude, latitude]);
