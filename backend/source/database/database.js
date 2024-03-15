@@ -5,8 +5,7 @@ const pool = mysql.createPool({
     host: process.host,
     user: process.user,
     password: process.password,
-    database: process.database,
-    connectionLimit: process.connectionLimit.connectionLimit
+    database: process.database
 }).promise()
 
 export default pool
