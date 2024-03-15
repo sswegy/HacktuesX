@@ -252,15 +252,6 @@ const polygons = [
         name: "solomon-sea",
         color: [130, 56, 187]
     },
-    /*{
-        type: "Feature",
-        geometry: {
-            type: "Polygon",
-            coordinates: [coordinates["north-pacific-ocean"]]
-        },
-        name: "north-pacific-ocean",
-        color: [130, 56, 187]
-    },*/
     {
         type: "Feature",
         geometry: {
@@ -445,9 +436,27 @@ const polygons = [
         type: "Feature",
         geometry: {
             type: "Polygon",
-            coordinates: [coordinates["caspian-sea"]]
+            coordinates: [coordinates["antarctic-north-indian-coast"]]
         },
-        name: "caspian-sea",
+        name: "antarctic-north-indian-coast",
+        color: [130, 56, 187]
+    },
+    {
+        type: "Feature",
+        geometry: {
+            type: "Polygon",
+            coordinates: [coordinates["north-pacific-north"]]
+        },
+        name: "north-pacific-north",
+        color: [130, 56, 187]
+    },
+    {
+        type: "Feature",
+        geometry: {
+            type: "Polygon",
+            coordinates: [coordinates["north-pacific-south"]]
+        },
+        name: "north-pacific-south",
         color: [130, 56, 187]
     },
 ];
