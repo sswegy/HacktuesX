@@ -25,7 +25,7 @@ export default async function getImageAndDescription(query) {
 
     try {
         // Introduce a delay of 1 second between each request
-        await delay(500); // 1000 milliseconds = 1 second
+        await delay(250); // 1000 milliseconds = 1 second
         const response = await axios.get(endpoint);
         const firstItem = response.data.items[0];
         if (firstItem) {

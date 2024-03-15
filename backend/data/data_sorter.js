@@ -55,9 +55,9 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
                 }
             }
         }
-        console.timeEnd("dbend");
+        console.timeEnd("dbtrack");
     } catch (parseError) {
-        console.timeEnd("dbend");
+        console.timeEnd("dbtrack");
         console.error('Error parsing JSON:', parseError);
     }
 });
