@@ -2,9 +2,6 @@ body {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
 }
 
 .container {
@@ -21,17 +18,12 @@ body {
 .searchbar-container {
 	display: flex;
 	flex-direction: column;
-	display: flex;
-	flex-direction: column;
 	align-items: center;
 	position: sticky;
 	top: 0;
 	z-index: 999;
 	height: 10%;
-	top: 0;
-	z-index: 999;
-	height: 10%;
-	width: 95%;
+	width: 100%;
 }
 
 .searchBarDiv {
@@ -63,13 +55,11 @@ body {
 
 .searchbar:focus {
 	background: #1B2454;
-	background: #1B2454;
 	border: 1px solid #4B67EB;
 	border-radius: 15px;
 }
 
 .searchbar::placeholder {
-	color: #cccccc;
 	color: #cccccc;
 }
 
@@ -81,7 +71,8 @@ body {
 }
 
 .content-container {
-	position: relative;
+	position: absolute;
+	z-index: 1;
 }
 
 .globemap-container {
@@ -156,69 +147,6 @@ body {
 	border: 1px solid #3a50bd;
 	border-radius: 15px;
 	box-shadow: 1px 2px 1px #4B67EB;
-}
-
-.searchTableElement {
-	height: 30px;
-	color: rgb(215, 217, 215);
-	font-size: 18px;
-}
-
-.searchTableElement:hover {
-	background-color: rgba(215, 217, 215, .1);
-}
-
-.searchTableBody {
-	background-color: #1A1E2E;
-	width: 100%;
-	max-width: 400px;
-	min-width: 300px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: 1px solid #333f72;
-	border-radius: 10px;
-}
-
-.searchTableElement {
-	height: 30px;
-	color: rgb(215, 217, 215);
-	font-size: 18px;
-}
-
-.searchTableElement:hover {
-	background-color: rgba(215, 217, 215, .1);
-}
-
-.searchTableBody {
-	background-color: #1A1E2E;
-	width: 100%;
-	max-width: 400px;
-	min-width: 300px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: 1px solid #333f72;
-	border-radius: 10px;
-}
-
-.searchTableElement {
-	height: 30px;
-	color: rgb(215, 217, 215);
-	font-size: 18px;
-}
-
-.searchTableElement:hover {
-	background-color: rgba(215, 217, 215, .1);
-}
-
-.searchTableBody {
-	background-color: #1A1E2E;
-	width: 100%;
-	max-width: 400px;
-	min-width: 300px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: 1px solid #333f72;
-	border-radius: 10px;
 }
 
 .searchTableElement {

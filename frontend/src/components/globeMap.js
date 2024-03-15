@@ -20,7 +20,7 @@ let fishArea = [{
   "locality": "Punta norte de Isla Cerralvo, B.C.S.",
   "depth": "3.0",
   "depthAccuracy": "unspecified",
-  "area": "south-america-west-coast",
+  "area": "South America West Coast",
   "image": "kuri_mi",
   "description": "qj go"
 }]
