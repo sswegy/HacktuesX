@@ -1,4 +1,3 @@
-import dummyImage from "../data/dummy/fish.png";
 import MoreInfoButton from "./moreInfoButton.js";
 
 

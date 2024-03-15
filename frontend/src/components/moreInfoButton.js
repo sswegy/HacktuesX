@@ -1,6 +1,6 @@
 export default function MoreInfoButton({ sideMoreInfoVisible, setSideMoreInfoVisible }) {
     const handleClick = () => {
-        setSideMoreInfoVisible({...sideMoreInfoVisible}, true);
+        setSideMoreInfoVisible({fishInfo: {...sideMoreInfoVisible}, isVisible: true});
     }
     return (
         <>
