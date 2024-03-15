@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
 import polygons from "./polygons.js";
 import areaNames from "../data/areaNameMap.js"
+import {fetchSearchData} from "../utility/requestHandler.js"
 
 let fishArea = [{
   "scientificName": "Antennatus sanguineus ",
