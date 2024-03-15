@@ -211,9 +211,9 @@ const polygons = [
         type: "Feature",
         geometry: {
             type: "Polygon",
-            coordinates: [coordinates["antartica-north-coast"]]
+            coordinates: [coordinates["antarctic-atlantic-coast"]]
         },
-        name: "antartica-north-coast",
+        name: "antarctic-atlantic-coast",
         color: [130, 56, 187]
     },
     {
@@ -436,9 +436,9 @@ const polygons = [
         type: "Feature",
         geometry: {
             type: "Polygon",
-            coordinates: [coordinates["antarctic-north-indian-coast"]]
+            coordinates: [coordinates["antarctic-pacific-coast"]]
         },
-        name: "antarctic-north-indian-coast",
+        name: "antarctic-pacific-coast",
         color: [130, 56, 187]
     },
     {
@@ -457,6 +457,15 @@ const polygons = [
             coordinates: [coordinates["north-pacific-south"]]
         },
         name: "north-pacific-south",
+        color: [130, 56, 187]
+    },
+    {
+        type: "Feature",
+        geometry: {
+            type: "Polygon",
+            coordinates: [coordinates["north-pacific-middle"]]
+        },
+        name: "north-pacific-middle",
         color: [130, 56, 187]
     },
 ];
