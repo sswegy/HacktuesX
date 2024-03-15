@@ -15,7 +15,6 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
     try {
         
     console.time("dbstart");    
-        // Parse JSON data
         
         const jsonData = JSON.parse(data);
         const arr = Array.from(jsonData);
@@ -42,7 +41,6 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
                     obj.description = item.description
                     obj.image = item.url   
                     
-                    //populating database
                    if(jsonData[i]["depth"] === 'unspecified')
                    {
                     jsonData[i]["depth"] = 0;
@@ -57,14 +55,13 @@ fs.readFile('./backend/data/extractedData.json', 'utf8',async (err, data) => {
                 }
             }
         }
-        console.timeEnd("dbend");
+        console.timeEnd("dbtrack");
     } catch (parseError) {
-        console.timeEnd("dbend");
+        console.timeEnd("dbtrack");
         console.error('Error parsing JSON:', parseError);
     }
 });
 function pointInsidePolygon(latitude, longitude, polygon) {
-    // Convert city boundary coordinates to Turf.js polygon
     const BoundaryPolygon = turf.polygon([polygon]);
     const point = turf.point([longitude, latitude]);
     const isInside = booleanPointInPolygon(point, BoundaryPolygon);

@@ -12,6 +12,41 @@ async function getFishByID(id) {
     return result[0]
 }
 
+async function getCommonFishOrder(area, type) {
+    const query = `SELECT scientificName, COUNT(*) AS occurrences FROM fishes WHERE area = ? GROUP BY scientificName ORDER BY occurrences ? LIMIT 50`
+    
+    const [result] = await pool.query(query, [area, type])
+    return result[0]
+}
+
+async function getAlphabeticalFishOrder(area, type) {
+    const query = `"SELECT scientificName FROM fishes WHERE area = ? ORDER BY scientificName ? LIMIT(50)"`
+    
+    const [result] = await pool.query(query, [area, type])
+    return result[0]
+}
+
+async function getFishByDepthRange(area, fromDepth, toDepth, type) {
+    let query = `SELECT scientificName, depth FROM fishes WHERE area = ?`
+    const params = [area]
+
+    if (fromDepth !== undefined && toDepth !== undefined) {
+        query += ` AND depth BETWEEN ? AND ?`
+        params.push(fromDepth, toDepth)
+    }
+    query += ` ORDER BY depth ? LIMIT(50)`
+    params.push(type)
+
+    const [result] = await pool.query(query, params)
+    return result
+}
+
+async function getFishByDepth(area, type) {
+    const query = `SELECT scientificName, depth FROM fishes WHERE area = ? ORDER BY depth ? LIMIT(50)`
+    const [result] = await pool.query(query, [area, type])
+    return result
+}
+
 // POST
 async function createFish(scientificName, decimalLatitude, decimalLongitude, locality, depth, depthAccuracy, description, image, area) {
     const result = await pool.query(
@@ -30,5 +65,4 @@ async function updateFishByID(id, scientificName, decimalLatitude, decimalLongit
     return result
 }
 
-// Exporting the functionse
 export default createFish
