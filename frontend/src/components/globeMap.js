@@ -38,7 +38,7 @@ export default function GlobeMap() {
     if( clickedPolygon === polygon.name ){
       return 0.1
     }else{
-      return 0.03
+      return 0.04
     }
   }
 

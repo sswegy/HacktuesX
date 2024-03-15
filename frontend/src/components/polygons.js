@@ -222,7 +222,7 @@ const polygons = [
         type: "Feature",
         geometry: {
             type: "Polygon",
-            coordinates: [coordinates["antartica-north-coast"]]
+            coordinates: [coordinates["antarctic-atlantic-coast"]]
         },
         name: "antartica-north-coast",
         color: colors[22]
@@ -447,7 +447,7 @@ const polygons = [
         type: "Feature",
         geometry: {
             type: "Polygon",
-            coordinates: [coordinates["antarctic-north-indian-coast"]]
+            coordinates: [coordinates["antarctic-pacific-coast"]]
         },
         name: "antarctic-north-indian-coast",
         color: colors[47]
