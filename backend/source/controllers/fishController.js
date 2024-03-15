@@ -55,11 +55,11 @@ export async function getFishByDepth(area, type) {
 }
 
 export async function getAreasAndFishByName(name) {
-    const query_area = "SELECT area WHERE name = ?"
-    const query_fish = "SELECT * WHERE name = ? LIMIT 1"
+    const query_area = "SELECT area FROM fishes WHERE scientificName = ?"
+    const query_fish = "SELECT * FROM fishes WHERE scientificName = ? LIMIT 1"
     
     let [result_area] = await pool.query(query_area, [name])
-    result_area = array.filter((item, index) => result_area.indexOf(item) === index);
+    result_area = result_area.filter((item, index) => result_area.indexOf(item) === index);
 
     let [result_fish] = await pool.query(query_fish, [name])
 

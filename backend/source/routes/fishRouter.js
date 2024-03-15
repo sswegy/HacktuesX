@@ -84,7 +84,7 @@ router.get('/byDepth', async (req, res) => {
 
 router.get('/areaFishByName/:name', async (req, res) => {
     try {
-        const {name} = req.params.name
+        const name = req.params.name
         const areasFish = await getAreasAndFishByName(name)
         res.json(areasFish);
     } catch (error) {
