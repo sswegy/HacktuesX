@@ -84,12 +84,11 @@ export default function GlobeMap() {
   }
 
   return (
-    <div className="globemap-container">
-      <Globe
-        ref={globeRef}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-        width={width * 95 / 100}
-        backgroundColor="#1A1E2E"
+    <Globe
+      ref={globeRef}
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+      width={width * 95 / 100}
+      backgroundColor="#1A1E2E"
 
         polygonsData={polygons}
         polygonGeoJsonGeometry={(polygon) => polygon.geometry}
@@ -109,8 +108,8 @@ export default function GlobeMap() {
               console.log(fishArea)
             }
             setClickedPolygon(polygon.name)
+            setSideInfoVisible(true);
         }}
       />
-    </div>
   );
 }
