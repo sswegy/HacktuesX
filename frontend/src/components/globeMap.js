@@ -48,6 +48,10 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
     };
   }, []);
 
+  const getKeyByValue = (object, value) => {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
   const changePolygonColor = (polygon) => {
     if (polygon.name === "world") {
       return "rgba(" + polygon.color[0] + ", " + polygon.color[1] + ", " + polygon.color[2] + ", " + 0.01 + ")"
@@ -104,7 +108,6 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
           setHoveredPolygon(polygon.name)
       }}
       onPolygonClick={(polygon) => {
-        console.log(polygon)
         if (polygon != null) {
           if (polygon.name === "world") {
             fishArea.length = 0;
@@ -114,6 +117,7 @@ export default function GlobeMap({ setSideInfoVisible, setCurrentPolygonName}) {
           }
           else
             setSideInfoVisible(true);
+          console.log(getKeyByValue(areaNames,polygon.name))
           setClickedPolygon(polygon.name);
           setCurrentPolygonName(polygon.name);
         }
