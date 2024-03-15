@@ -163,6 +163,14 @@ body {
 	background-color: rgba(215, 217, 215, .1);
 }
 
+.searchTableElement {
+	cursor: pointer;
+}
+
+.searchTableElement:hover {
+	cursor: pointer;
+}
+
 .searchTableBody {
 	background-color: #1A1E2E;
 	width: 100%;
