@@ -1,5 +1,5 @@
 import suggestAutoFill from "../utility/suggestAutoFill.js";
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { fetchSearchData } from "../utility/requestHandler.js";
 import { polygonSelectResult } from "./globeMap.js";
 
@@ -12,8 +12,6 @@ export const setSearchedFishPolygon = (data) => {
 export default function SearchBar({ setSideMoreInfoVisible, setFishName, setFishData, setFishImageSource }) {
   const [inputValue, setInputValue] = useState("");
   const [suggestionText, setSuggestionText] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const suggestionsListRef = useRef(null);
 
   const handleKeyPress = async (event) => {
     if (event.key === 'Enter') {
@@ -40,25 +38,6 @@ export default function SearchBar({ setSideMoreInfoVisible, setFishName, setFish
     setSuggestionText([]);
   }
 
-  const handleTabPress = (event) => {
-    if (event.key === 'Tab' && suggestionText.length > 0) {
-      event.preventDefault();
-      suggestionsListRef.current.focus(); // Focus on suggestions list
-      setSelectedIndex(0); // Start from the first suggestion when tab is pressed
-    }
-  };
-
-  const handleSuggestionKeyDown = (event) => {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      const nextIndex = (selectedIndex + 1) % suggestionText.length;
-      setInputValue(suggestionText[nextIndex]);
-      setSelectedIndex(nextIndex);
-      // Avoid losing focus from input when cycling through suggestions with tab
-      event.stopPropagation();
-    }
-  };
-
   return (
     <>
       <div className="searchBarDiv">
@@ -72,15 +51,13 @@ export default function SearchBar({ setSideMoreInfoVisible, setFishName, setFish
           value={inputValue}
           onKeyPress={handleKeyPress}
           onChange={handleInputChange}
-          onKeyDown={handleTabPress}
         />
       </div>
       {suggestionText.length > 0 && (
-        <table className="searchTableBody" tabIndex="0" ref={suggestionsListRef} onKeyDown={handleSuggestionKeyDown} // Attach handleSuggestionKeyDown to onKeyDown
-        >
+        <table className="searchTableBody">
           <tbody>
             {suggestionText.map((item, index) => (
-              <tr key={index} className={selectedIndex === index ? 'selected' : ''}>
+              <tr>
                 <td className="searchTableElement" onClick={() => { fillSearchBar(item) }}>{item}</td>
               </tr>
             ))}
