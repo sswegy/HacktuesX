@@ -1,6 +1,6 @@
 import CloseMoreInfoBarButton from "./closeMoreInfoBarButton.js";
 
-export default function SideMoreInfoBar({ fishName, fishImageSource, fishData, setSideMoreInfoVisible }) {
+export default function SideMoreInfoBar({ fishName, fishImageSource, fishData, index, setSideMoreInfoVisible }) {
     return (
         <div className="side-more-info-bar-container">
             <div className="side-more-info-bar-title">

@@ -1,6 +1,8 @@
-export default function MoreInfoButton({ sideMoreInfoVisible, setSideMoreInfoVisible }) {
+import { polygonSelectResult } from "./globeMap.js";
+
+export default function MoreInfoButton({ index, setSideMoreInfoVisible }) {
     const handleClick = () => {
-        setSideMoreInfoVisible({fishInfo: {...sideMoreInfoVisible}, isVisible: true});
+        setSideMoreInfoVisible({fishInfo: polygonSelectResult[index], isVisible: true});
     }
     return (
         <>

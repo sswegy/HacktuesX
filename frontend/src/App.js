@@ -11,13 +11,14 @@ import { polygonSelectResult } from "./components/globeMap.js";
 
 function App() {
   const [sideInfoVisible, setSideInfoVisible] = useState(false);
-  const [sideMoreInfoVisible, setSideMoreInfoVisible] = useState({fishInfo: {}, isVisible: false});
+  const [sideMoreInfoVisible, setSideMoreInfoVisible] = useState({ fishInfo: polygonSelectResult[0], isVisible: false });
   const [currentPolygonName, setCurrentPolygonName] = useState("");
   const [fishName, setFishName] = useState("");
   const [fishData, setFishData] = useState("");
   const [fishImageSource, setFishImageSource] = useState("");
+  const [idx, setIdx] = useState(0);
 
-  
+
   console.log(sideMoreInfoVisible);
   console.log(polygonSelectResult);
 
@@ -32,13 +33,13 @@ function App() {
         </div>
         {sideInfoVisible ?
           <SideInfoBar oceanName={currentPolygonName}>
-            {polygonSelectResult.map((item) => (
-              <SideInfoCell fishName={item.scientificName} fishImageSource={item.image} sideMoreInfoVisible={sideMoreInfoVisible} setSideMoreInfoVisible={setSideMoreInfoVisible}/>
-            ))}
+            {polygonSelectResult.map((item, index) => (
+              <SideInfoCell index={index} fishName={item.scientificName} fishImageSource={item.image} sideMoreInfoVisible={sideMoreInfoVisible} setSideMoreInfoVisible={setSideMoreInfoVisible} />
+              ))}
           </SideInfoBar>
           : <></>}
-        {sideMoreInfoVisible.isVisible ?
-          <SideMoreInfoBar fishData={sideMoreInfoVisible.fishInfo.description} fishImageSource={sideMoreInfoVisible.fishInfo.description} fishName={sideMoreInfoVisible.fishInfo.scientificName} setSideMoreInfoVisible={setSideMoreInfoVisible} /> : <></>}
+          {sideMoreInfoVisible.isVisible ?
+          <SideMoreInfoBar index={idx} fishData={sideMoreInfoVisible.fishInfo.description} fishImageSource={sideMoreInfoVisible.fishInfo.image} fishName={sideMoreInfoVisible.fishInfo.scientificName} setSideMoreInfoVisible={setSideMoreInfoVisible} /> : <></>}
       </div>
     </div>
   );
