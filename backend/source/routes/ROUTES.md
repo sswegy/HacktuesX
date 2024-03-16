@@ -22,7 +22,16 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `id`: The ID of the fish.
 - **Response:** The fish object matching the provided ID.
 
-### 3. Get Common Fish Order
+### 3. Get Fish by Area
+
+- **URL:** `/fishes/area/:area`
+- **Method:** `GET`
+- **Description:** Retrieves fish records by area.
+- **Parameters:**
+  - `area`: The area to filter by.
+- **Response:** An array of fish objects for the specified area.
+
+### 4. Get Common Fish Order
 
 - **URL:** `/fishes/common`
 - **Method:** `GET`
@@ -32,7 +41,7 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `type`: The type of fish to filter by.
 - **Response:** An array of fish objects in the common order.
 
-### 4. Get Alphabetical Fish Order
+### 5. Get Alphabetical Fish Order
 
 - **URL:** `/fishes/alphabetical`
 - **Method:** `GET`
@@ -42,7 +51,7 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `type`: The type of fish to filter by.
 - **Response:** An array of fish objects in alphabetical order.
 
-### 5. Get Fish by Depth Range
+### 6. Get Fish by Depth Range
 
 - **URL:** `/fishes/depth`
 - **Method:** `GET`
@@ -54,7 +63,7 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `type`: The type of fish to filter by.
 - **Response:** An array of fish objects within the specified depth range.
 
-### 6. Get Fish by Depth
+### 7. Get Fish by Depth
 
 - **URL:** `/fishes/byDepth`
 - **Method:** `GET`
@@ -64,7 +73,16 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `type`: The type of fish to filter by.
 - **Response:** An array of fish objects sorted by depth.
 
-### 7. Create Fish
+### 8. Get Areas and Fish by Name
+
+- **URL:** `/fishes/areaFishByName/:name`
+- **Method:** `GET`
+- **Description:** Retrieves areas and fish records by name.
+- **Parameters:**
+  - `name`: The name to search for.
+- **Response:** An array of areas and fish objects matching the provided name.
+
+### 9. Create Fish
 
 - **URL:** `/fishes`
 - **Method:** `POST`
@@ -81,7 +99,7 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `area`: The area where the fish is found.
 - **Response:** The created fish object.
 
-### 8. Update Fish by ID
+### 10. Update Fish by ID
 
 - **URL:** `/fishes/id/:id`
 - **Method:** `PUT`
@@ -96,4 +114,3 @@ The Fish API provides endpoints to interact with fish data, including retrieving
   - `depth`: The updated depth at which the fish is found.
   - `depthAccuracy`: The updated accuracy of the depth measurement.
 - **Response:** The updated fish object.
-

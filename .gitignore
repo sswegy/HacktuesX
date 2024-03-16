@@ -3,3 +3,5 @@ data.csv
 .env
 backend/process.js
 process.js
+backend/data
+backend/source/utility
