@@ -1,43 +1,51 @@
-import './App.css';
-import React, { useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import Globe from 'react-globe.gl';
+import "./App.css";
+import React, { useState } from "react";
+import GlobeMap from "./components/globeMap.js";
+import SearchBar from "./components/searchBar.js";
+import SideInfoBar from "./components/sideInfoBar.js";
+import SideMoreInfoBar from "./components/sideMoreInfoBar.js";
+import SideInfoCell from "./components/sideInfoCell.js";
+import { polygonSelectResult } from "./components/globeMap.js";
+
+
 
 function App() {
-  const globeRef = useRef(null);
+  const [sideInfoVisible, setSideInfoVisible] = useState(false);
+  const [sideMoreInfoVisible, setSideMoreInfoVisible] = useState({ fishInfo: polygonSelectResult[0], isVisible: false });
+  const [currentPolygonName, setCurrentPolygonName] = useState("");
+  const [fishName, setFishName] = useState("");
+  const [fishData, setFishData] = useState("");
+  const [fishImageSource, setFishImageSource] = useState("");
+  const [idx, setIdx] = useState(0);
 
-  const handleClick = (event) => {
-    const { offsetX, offsetY } = event.nativeEvent;
-    
-    // Check if globeRef.current is not null before accessing its properties/methods
-    if (globeRef.current) {
-      const globeCoords = globeRef.current.toGlobeCoords(offsetX, offsetY);
-      if (globeCoords) {
-        const { lat, lng } = globeCoords;
-        console.log('Clicked coordinates:', { lat, lng });
-      } else {
-        console.log('Globe coordinates could not be determined.');
-      }
-    } else {
-      console.log('Globe reference is not yet initialized.');
-    }
-  };
+
+  console.log(sideMoreInfoVisible);
+  console.log(polygonSelectResult);
 
   return (
     <div className="container">
-      <div className="searchBar">
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-        <input placeholder="niggers"/>
+      <div className="searchbar-container">
+        <SearchBar setSideMoreInfoVisible={setSideMoreInfoVisible} setFishData={setFishData} setFishImageSource={setFishImageSource} setFishName={setFishName} />
       </div>
-      <div onClick={handleClick}>
-        <Globe
-            ref={globeRef}
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-            width = {500}
-            height={500}
-            backgroundColor="#edede9"
-          />
+      <div className="content-container">
+        <div className="globemap-container">
+          <GlobeMap setSideInfoVisible={setSideInfoVisible} setCurrentPolygonName={setCurrentPolygonName} />
+        </div>
+        {sideInfoVisible ?
+          <SideInfoBar oceanName={currentPolygonName}>
+            {polygonSelectResult.length > 0 && polygonSelectResult.map((item, index) => (
+              <SideInfoCell
+                index={index}
+                fishName={item.scientificName}
+                fishImageSource={item.image}
+                sideMoreInfoVisible={sideMoreInfoVisible}
+                setSideMoreInfoVisible={setSideMoreInfoVisible}
+              />
+            ))}
+          </SideInfoBar>
+          : <></>}
+        {sideMoreInfoVisible.isVisible ?
+          <SideMoreInfoBar index={idx} fishData={sideMoreInfoVisible.fishInfo.description} fishImageSource={sideMoreInfoVisible.fishInfo.image} fishName={sideMoreInfoVisible.fishInfo.scientificName} setSideMoreInfoVisible={setSideMoreInfoVisible} /> : <></>}
       </div>
     </div>
   );
