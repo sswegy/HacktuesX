@@ -6,10 +6,9 @@ async function getFishList() {
         const result = await database.query(`SELECT DISTINCT scientificName FROM fishes WHERE locality != 'unknown';`);
 
         result.forEach(row => {
-            scientificNames.push(row.scientificName); // Push scientificName into the scientificNames array
+            scientificNames.push(row.scientificName); 
         });
 
-        // Log the array of scientific names
         console.log(scientificNames);
 
     } catch (error) {

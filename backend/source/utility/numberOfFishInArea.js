@@ -3,9 +3,8 @@ import database from "../database/database.js";
 import coordinates from "../../../frontend/src/data/coordinates.js";
 async function getFishCountForArea(area) {
     try {
-        // Assuming 'query' is a function in your database library to query the database
         const result = await database.query(`Select * FROM fishes WHERE area = '${area}'`);
-        //console.log(result);
+        
         return result[0].length;
     } catch (error) {
         console.error(`Error querying database for area ${area}:`, error);
@@ -13,7 +12,6 @@ async function getFishCountForArea(area) {
     }
 }
 
-// Function to get the number of fishes for each area in an array
 async function getFishCountsForAreas() {
     const counts = {};
 

@@ -13,7 +13,7 @@ async function fetchDescription(query) {
         const response = await axios.get(endpoint)
         return response.data.extract
     } catch (error) {
-        // console.log("error")
+        console.log("error")
     }
 }
 
