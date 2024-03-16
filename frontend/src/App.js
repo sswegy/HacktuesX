@@ -33,12 +33,18 @@ function App() {
         </div>
         {sideInfoVisible ?
           <SideInfoBar oceanName={currentPolygonName}>
-            {polygonSelectResult.map((item, index) => (
-              <SideInfoCell index={index} fishName={item.scientificName} fishImageSource={item.image} sideMoreInfoVisible={sideMoreInfoVisible} setSideMoreInfoVisible={setSideMoreInfoVisible} />
-              ))}
+            {polygonSelectResult.length > 0 && polygonSelectResult.map((item, index) => (
+              <SideInfoCell
+                index={index}
+                fishName={item.scientificName}
+                fishImageSource={item.image}
+                sideMoreInfoVisible={sideMoreInfoVisible}
+                setSideMoreInfoVisible={setSideMoreInfoVisible}
+              />
+            ))}
           </SideInfoBar>
           : <></>}
-          {sideMoreInfoVisible.isVisible ?
+        {sideMoreInfoVisible.isVisible ?
           <SideMoreInfoBar index={idx} fishData={sideMoreInfoVisible.fishInfo.description} fishImageSource={sideMoreInfoVisible.fishInfo.image} fishName={sideMoreInfoVisible.fishInfo.scientificName} setSideMoreInfoVisible={setSideMoreInfoVisible} /> : <></>}
       </div>
     </div>
